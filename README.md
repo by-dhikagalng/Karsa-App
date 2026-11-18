@@ -21,8 +21,9 @@ An application for fragment information from KSM / Organization at UPNVJ
 ## Division of work 
 | Name | Student no. | Part built | 
 |------|-------------|------------| 
-| Andhika | 2510512080 | project skeleton, Models, relations, merging PRs | 
-| Adiva | 2510512111 | student list feature | 
-| Nasywa | 2510512128 | program list feature | 
-| Khansa | 2510512059 | program list feature | 
-| Arya Ramadhan Kawi | 2510512079 | program list feature | 
+| Andhika Galang Adisaputro | 2510512080 | Project Lead dan Koordinasi Jadwal, Fondasi Laravel (Database, Migration, Seeder), Integrasi | 
+| Bekti Nur Wicaksono | 2510512043 | Authentication & Role Management (Admin KSM / Super Admin) | 
+| Adiva Mayyadah Putri Prasetyo | 2510512111 | Event Management & Event Discovery (CRUD, Filter, status pendaftaran otomatis) | 
+| Arya Ramadhan Kawi | 2510512073 | Poster dan Preferences (Download, Upload, Delete Poster, Kategori terakhir yang dipilih pengunjung) | 
+| Nasywa Athiyyah Aufa | 2510512084 | User Interface (Layout, CSS, Tampilan Katalog, Detail, Jadwal) |
+| Khansa Khayyira Kurniawan | 2510512059 | User Interaction (Javascript) | 
