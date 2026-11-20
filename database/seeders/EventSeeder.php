@@ -14,101 +14,110 @@ class EventSeeder extends Seeder
      */
     public function run(): void
     {
-        $veterantech = Organization::where('name', 'KSM Veterantech')->first();
-        $multimedia = Organization::where('name', 'KSM Multimedia')->first();
-        $cybersecurity = Organization::where('name', 'KSM CyberSecurity')->first();
-        $iot = Organization::where('name', 'KSM IOT')->first();
-        $bem = Organization::where('name', 'BEM-Fik')->first();
-        $himaSi = Organization::where('name', 'HIMA S1 Sistem Informasi')->first();
-        $himaIf = Organization::where('name', 'HIMA Informatika')->first();
-        $himaD3 = Organization::where('name', 'HIMA D3 Sistem Informasi')->first();
+        $events = [
+            [ // Data KSM Vtech
+                'organization' => 'KSM Veterantech',
+                'title' => 'Tech For Society',
+                'category' => 'seminar_workshop',
+                'description' => 'Seminar untuk pembelajaran teknologi umum & dasar kepada masyarakat umum.',
+                'location' => 'Auditorium BTI',
+                'days_to_event' => 14,
+                'days_to_deadline' => 10,
+                'registration_url' => 'https://example.com/register/TFS',
+            ],
+            
+            [ // Data KSM Mulmed
+                'organization' => 'KSM Multimedia',
+                'title' => 'Pelatihan Desain Grafis',
+                'category' => 'seminar_workshop',
+                'description' => 'Pelatihan dasar desain grafis untuk mahasiswa UPNVJ.',
+                'location' => 'Lab Komputer FIK',
+                'days_to_event' => 17,
+                'days_to_deadline' => 12,
+                'registration_url' => 'https://example.com/register/desain',
+            ],
 
-        Event::create([
-            'organization_id' => $veterantech->id,
-            'title' => 'Tech For Society',
-            'category' => 'Seminar',
-            'description' => 'Seminar untuk pembelajaran teknologi umum & dasar kepada masyarakat umum.',
-            'location' => 'Auditorium BTI',
-            'event_date' => '2026-12-05',
-            'registration_url' => 'https://example.com/register/TFS',
-            'poster_path' => null,
-        ]);
+            [ // Data KSM CyberSec
+                'organization' => 'KSM CyberSecurity',
+                'title' => 'Cyber Security Awareness',
+                'category' => 'seminar_workshop',
+                'description' => 'Seminar mengenai keamanan digital dan kesadaran terhadap ancaman siber.',
+                'location' => 'Auditorium BTI',
+                'days_to_event' => 20,
+                'days_to_deadline' => 15,
+                'registration_url' => 'https://example.com/register/cyber',
+            ],
 
-        Event::create([
-            'organization_id' => $multimedia->id,
-            'title' => 'Pelatihan Desain Grafis',
-            'category' => 'Pelatihan',
-            'description' => 'Pelatihan dasar desain grafis untuk mahasiswa UPNVJ.',
-            'location' => 'Lab Komputer FIK',
-            'event_date' => '2026-12-07',
-            'registration_url' => 'https://example.com/register/desain',
-            'poster_path' => null,
-        ]);
+            [ // Data KSM IOT
+                'organization' => 'KSM IOT',
+                'title' => 'Workshop Internet of Things',
+                'category' => 'seminar_workshop',
+                'description' => 'Workshop pengenalan teknologi Internet of Things untuk mahasiswa FIK UPNVJ.',
+                'location' => 'Lab Komputer FIK',
+                'days_to_event' => 12,
+                'days_to_deadline' => 8,
+                'registration_url' => 'https://example.com/register/iot',
+            ],
 
-        Event::create([
-            'organization_id' => $cybersecurity->id,
-            'title' => 'Cyber Security Awareness',
-            'category' => 'Seminar',
-            'description' => 'Seminar mengenai keamanan digital dan kesadaran terhadap ancaman siber.',
-            'location' => 'Auditorium BTI',
-            'event_date' => '2026-12-10',
-            'registration_url' => 'https://example.com/register/cyber',
-            'poster_path' => null,
-        ]);
+            [ // Data BEMF-ik
+                'organization' => 'BEM-Fik',
+                'title' => 'Seminar Nasional Mahasiswa',
+                'category' => 'seminar_workshop',
+                'description' => 'Seminar nasional yang terbuka untuk mahasiswa UPNVJ.',
+                'location' => 'Auditorium BTI',
+                'days_to_event' => 25,
+                'days_to_deadline' => 20,
+                'registration_url' => 'https://example.com/register/seminar',
+            ],
 
-        Event::create([
-            'organization_id' => $iot->id,
-            'title' => 'Workshop Internet of Things',
-            'category' => 'Workshop',
-            'description' => 'Workshop pengenalan teknologi Internet of Things untuk mahasiswa FIK UPNVJ.',
-            'location' => 'Lab Komputer FIK',
-            'event_date' => '2026-12-12',
-            'registration_url' => 'https://example.com/register/iot',
-            'poster_path' => null,
-        ]);
+            [ // Data HIM S1 Sisfor 
+                'organization' => 'HIMA S1 Sistem Informasi',
+                'title' => 'Open Recruitment HIMA S1 SI',
+                'category' => 'beasiswa_lainnya',
+                'description' => 'Pembukaan registrasi organisasi HIMA S1 Sistem Informasi untuk mahasiswa S1 Sistem Informasi FIK UPNVJ.',
+                'location' => 'FIK UPNVJ',
+                'days_to_event' => 10,
+                'days_to_deadline' => 3,
+                'registration_url' => 'https://example.com/register/OPRECHIMAS1SI',
+            ],
 
-        Event::create([
-            'organization_id' => $bem->id,
-            'title' => 'Seminar Nasional Mahasiswa',
-            'category' => 'Seminar',
-            'description' => 'Seminar nasional yang terbuka untuk mahasiswa UPNVJ.',
-            'location' => 'Auditorium BTI',
-            'event_date' => '2026-12-15',
-            'registration_url' => 'https://example.com/register/seminar',
-            'poster_path' => null,
-        ]);
+            [ // Data Hima IF
+                'organization' => 'HIMA Informatika',
+                'title' => 'Coding Competition',
+                'category' => 'lomba',
+                'description' => 'Kompetisi pemrograman untuk mahasiswa umum seluruh universitas di-Indonesia.',
+                'location' => 'FIK UPNVJ',
+                'days_to_event' => 5,
+                'days_to_deadline' => -2,
+                'registration_url' => 'https://example.com/register/coding',
+            ],
 
-        Event::create([
-            'organization_id' => $himaSi->id,
-            'title' => 'Open Recruitment HIMA S1 SI',
-            'category' => 'Organisasi',
-            'description' => 'Pembukaan registrasi organisasi HIMA S1 Sistem Informasi untuk Mahasiswa S1 Sistem Informasi FIK UPNVJ.',
-            'location' => 'FIK UPNVJ',
-            'event_date' => '2026-12-18',
-            'registration_url' => 'https://example.com/register/OPRECHIMAS1SI',
-            'poster_path' => null,
-        ]);
+            [ // Data Hima D3 SI
+                'organization' => 'HIMA D3 Sistem Informasi',
+                'title' => 'Sharing Session Teknologi',
+                'category' => 'seminar_workshop',
+                'description' => 'Sharing session mengenai perkembangan teknologi dan pengalaman mahasiswa FIK UPNVJ.',
+                'location' => 'Lab Komputer FIK',
+                'days_to_event' => 18,
+                'days_to_deadline' => 13,
+                'registration_url' => 'https://example.com/register/sharing',
+            ],
+        ];
 
-        Event::create([
-            'organization_id' => $himaIf->id,
-            'title' => 'Coding Competition',
-            'category' => 'Lomba',
-            'description' => 'Kompetisi pemrograman untuk mahasiswa umum seluruh Universitas di-Indonesia.',
-            'location' => 'FIK UPNVJ',
-            'event_date' => '2026-12-20',
-            'registration_url' => 'https://example.com/register/coding',
-            'poster_path' => null,
-        ]);
+        foreach ($events as $data) {
+            $organization = Organization::where('name', $data['organization'])->firstOrFail();
 
-        Event::create([
-            'organization_id' => $himaD3->id,
-            'title' => 'Sharing Session Teknologi',
-            'category' => 'Sharing Session',
-            'description' => 'Sharing session mengenai perkembangan teknologi dan pengalaman mahasiswa FIK UPNVJ.',
-            'location' => 'Lab Komputer FIK',
-            'event_date' => '2026-12-22',
-            'registration_url' => 'https://example.com/register/sharing',
-            'poster_path' => null,
-        ]);
+            Event::create([
+                'organization_id' => $organization->id,
+                'title' => $data['title'],
+                'category' => $data['category'],
+                'description' => $data['description'],
+                'location' => $data['location'],
+                'event_date' => now()->addDays($data['days_to_event'])->toDateString(),
+                'registration_deadline' => now()->addDays($data['days_to_deadline'])->toDateString(),
+                'registration_url' => $data['registration_url'],
+                'poster_path' => null,
+            ]);
+        }
     }
 }

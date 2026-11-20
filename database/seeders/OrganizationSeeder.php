@@ -13,45 +13,19 @@ class OrganizationSeeder extends Seeder
      */
     public function run(): void
     {
-        Organization::create([
-            'name' => 'KSM Veterantech',
-            'type' => 'KSM',
-        ]);
+        $organizations = [
+            ['KSM Veterantech', 'KSM'],
+            ['KSM Multimedia', 'KSM'],
+            ['KSM CyberSecurity', 'KSM'],
+            ['KSM IOT', 'KSM'],
+            ['BEM-Fik', 'Ormawa'],
+            ['HIMA S1 Sistem Informasi', 'Ormawa'],
+            ['HIMA Informatika', 'Ormawa'],
+            ['HIMA D3 Sistem Informasi', 'Ormawa'],
+        ];
 
-        Organization::create([
-            'name' => 'KSM Multimedia',
-            'type' => 'KSM',
-        ]);
-
-        Organization::create([
-            'name' => 'KSM CyberSecurity',
-            'type' => 'KSM',
-        ]);
-
-        Organization::create([
-            'name' => 'KSM IOT',
-            'type' => 'KSM',
-        ]);
-
-        Organization::create([
-            'name' => 'BEM-Fik',
-            'type' => 'Ormawa',
-        ]);
-
-        Organization::create([
-            'name' => 'HIMA S1 Sistem Informasi',
-            'type' => 'Ormawa',
-        ]);
-
-        Organization::create([
-            'name' => 'HIMA Informatika',
-            'type' => 'Ormawa',
-        ]);
-
-        Organization::create([
-            'name' => 'HIMA D3 Sistem Informasi',
-            'type' => 'Ormawa',
-        ]);
-
+        foreach ($organizations as [$name, $type]) {
+            Organization::firstOrCreate(['name' => $name], ['type' => $type]);
+        }
     }
 }

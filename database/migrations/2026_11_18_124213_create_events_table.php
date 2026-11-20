@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('location');
             $table->date('event_date');
+            $table->date('registration_deadline'); // Badge untuk menentukan status pendaftaran apakah Open, Closing, dan Closed
             $table->string('registration_url');
             $table->string('poster_path')->nullable();
             $table->timestamps();
