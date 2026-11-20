@@ -20,6 +20,8 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    protected $table = 'users';
+
     protected $fillable = [
         'name',
         'email',
@@ -54,5 +56,10 @@ class User extends Authenticatable
     public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class);
+    }
+
+    public function isSuperAdmin(): bool // Fitur revisi dari Bekti. Untuk Authentication Super Admin
+    {
+        return $this->role === 'super_admin';
     }
 }

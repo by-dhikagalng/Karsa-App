@@ -52,4 +52,9 @@ class Event extends Model
 
         return 'open';
     }
+
+    public function setTitleAttribute($value): void // Fitur revisi Bekti, untuk menghapus input spasi lebih
+    {
+        $this->attributes['title'] = preg_replace('/\s+/', ' ', trim($value));
+    }
 }

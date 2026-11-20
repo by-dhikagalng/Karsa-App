@@ -107,9 +107,13 @@ class EventSeeder extends Seeder
         foreach ($events as $data) {
             $organization = Organization::where('name', $data['organization'])->firstOrFail();
 
-            Event::create([
+            Event::firstOrCreate(
+                [
                 'organization_id' => $organization->id,
                 'title' => $data['title'],
+                ],
+
+                [
                 'category' => $data['category'],
                 'description' => $data['description'],
                 'location' => $data['location'],
@@ -117,7 +121,8 @@ class EventSeeder extends Seeder
                 'registration_deadline' => now()->addDays($data['days_to_deadline'])->toDateString(),
                 'registration_url' => $data['registration_url'],
                 'poster_path' => null,
-            ]);
+                ]
+            );
         }
     }
 }

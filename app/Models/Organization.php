@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Organization extends Model
 {
+    protected $table = 'organizations';
+
     protected $fillable = ['name', 'type'];
 
     public function events(): HasMany 

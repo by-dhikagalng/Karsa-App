@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('role')->after('password');
-            $table->foreignId('organization_id')->nullable()->after('role')->constrained('organizations');
+            $table->foreignId('organization_id')->nullable()->after('role')->constrained('organizations')->restrictOnDelete();
         });
     }
 
