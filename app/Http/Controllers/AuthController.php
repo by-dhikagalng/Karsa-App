@@ -8,7 +8,7 @@ class AuthController extends Controller
 {
     public function showLogin() // Form login
     {
-        return 'TODO Login Page Bekti';
+        return view('events.login');
     }
 
     public function login() // Proses login
