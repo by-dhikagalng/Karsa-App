@@ -70,22 +70,73 @@ class AdminEventController extends Controller
             ->with('success', 'Event "' . $validated['title'] . '" berhasil ditambahkan.');
     }
 
-    public function edit()
+    // Menampilkan form ubah event (hanya pemilik atau super admin)
+    public function edit(Event $event)
     {
-        return 'TODO admin event edit data Ayya';
+        $this->pastikanPemilik($event);
+
+        return view('admin.events.edit', [
+            'event' => $event,
+            'categories' => Event::CATEGORIES,
+            'organizations' => $this->daftarOrganisasi(),
+        ]);
     }
 
-    public function update()
+    public function update(Request $request, Event $event)
     {
-        return 'TODO admin event update data Ayya';
-    }
+        $this->pastikanPemilik($event);
 
-    public function destroy()
-    {
-        return 'TODO admin event delete data Ayya';
+        $request->merge(['title' => $this->rapikanJudul($request->input('title'))]);
+
+        $validated = $request->validate(
+            $this->aturanValidasi($request, $event),
+            $this->pesanValidasi(),
+            $this->namaKolom()
+        );
+
+        $validated['organization_id'] = $this->organisasiId($request);
+        unset($validated['poster']);
+
+        $posterLama = $event->poster_path;
+        $posterBaru = null;
+
+        try {
+            DB::transaction(function () use ($request, $event, &$validated, &$posterBaru) {
+                $posterBaru = $this->pindahkanPoster($request);
+
+                if ($posterBaru) {
+                    $validated['poster_path'] = $posterBaru;
+                }
+
+                $event->update($validated);
+            });
+        } catch (\Throwable $e) {
+            $this->hapusPoster($posterBaru);
+            throw $e;
+        }
+
+        if ($posterBaru) {
+            $this->hapusPoster($posterLama);
+        }
+
+        return redirect()
+            ->route('admin.events.index')
+            ->with('success', 'Event "' . $event->title . '" berhasil diperbarui.');
     }
 
     // ===================== Helper =====================
+
+        // Menolak akses (403) jika event bukan milik organisasi admin yang login
+    private function pastikanPemilik(Event $event): void
+    {
+        $user = auth()->user();
+
+        abort_unless(
+            $user->isSuperAdmin() || (int) $event->organization_id === (int) $user->organization_id,
+            403,
+            'Kamu tidak berhak mengelola event organisasi lain.'
+        );
+    }
 
     // Menentukan organisasi pemilik event: super admin memilih, admin ormawa otomatis organisasinya
     private function organisasiId(Request $request): ?int
