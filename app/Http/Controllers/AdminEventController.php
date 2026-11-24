@@ -2,13 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class AdminEventController extends Controller
 {
+    // Menampilkan daftar event: admin ormawa hanya miliknya, super admin semua
     public function index()
     {
-        return 'TODO admin event index Ayya';
+        $user = auth()->user();
+
+        $events = Event::with('organization')
+            ->when(! $user->isSuperAdmin(), fn ($query) => $query->where('organization_id', $user->organization_id))
+            ->orderByDesc('event_date')
+            ->paginate(10);
+
+        return view('admin.events.index', [
+            'events' => $events,
+            'categories' => Event::CATEGORIES,
+        ]);
     }
 
     public function create()
