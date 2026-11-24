@@ -70,7 +70,7 @@ class EventSeeder extends Seeder
                 'registration_url' => 'https://example.com/register/seminar',
             ],
 
-            [ // Data HIM S1 Sisfor 
+            [ // Data HIMA S1 Sisfor 
                 'organization' => 'HIMA S1 Sistem Informasi',
                 'title' => 'Open Recruitment HIMA S1 SI',
                 'category' => 'beasiswa_lainnya',
@@ -101,6 +101,50 @@ class EventSeeder extends Seeder
                 'days_to_event' => 18,
                 'days_to_deadline' => 13,
                 'registration_url' => 'https://example.com/register/sharing',
+            ],
+
+            [ // Data OpRec Hima IF
+                'organization' => 'HIMA Informatika',
+                'title' => 'Open Recruitment HIMA Informatika FIK UPNVJ',
+                'category' => 'beasiswa_lainnya',
+                'description' => 'Pembukaan registrasi organisasi HIMA S1 Informatika untuk mahasiswa S1 Informatika FIK UPNVJ.',
+                'location' => 'FIK UPNVJ',
+                'days_to_event' => 22,
+                'days_to_deadline' => 20,
+                'registration_url' => 'https://example.com/register/OPRECHIMAIF',
+            ],
+
+            [ // Data OpRec Hima D3 SI
+                'organization' => 'HIMA D3 Sistem Informasi',
+                'title' => 'Open Recruitment HIMA D3 Sistem Informasi FIK UPNVJ',
+                'category' => 'beasiswa_lainnya',
+                'description' => 'Pembukaan registrasi organisasi HIMA D3 Sistem Informasi untuk mahasiswa D3 Sistem Informasi FIK UPNVJ.',
+                'location' => 'FIK UPNVJ',
+                'days_to_event' => 18,
+                'days_to_deadline' => 15,
+                'registration_url' => 'https://example.com/register/OPRECHIMAD3SI',
+            ],
+
+            [ // Data BEMF-ik
+                'organization' => 'BEM-Fik',
+                'title' => 'Company Visit to Astra Indonesia',
+                'category' => 'seminar_workshop',
+                'description' => 'Pelaksanaan Company Visit ke Astra Indonesia dengan Seminar dan Workshop From Professionals!',
+                'location' => 'Astra Indonesia',
+                'days_to_event' => 14,
+                'days_to_deadline' => 10,
+                'registration_url' => 'https://example.com/register/COMPVISASTRA',
+            ],
+
+            [ // Data KSM Vtech
+                'organization' => 'KSM Veterantech',
+                'title' => 'Study Club Public',
+                'category' => 'seminar_workshop',
+                'description' => 'Sesi pembelajaran dengan mentor professional di bidang lingkup teknologi.',
+                'location' => 'FIK UPNVJ',
+                'days_to_event' => 20,
+                'days_to_deadline' => 14,
+                'registration_url' => 'https://example.com/register/SCP',
             ],
         ];
 
