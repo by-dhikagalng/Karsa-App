@@ -1,6 +1,7 @@
-
 function parseTanggal(teks) {
-    var bagian = teks.split("-");
+    var tanggalSaja = String(teks).trim().split(/[ T]/)[0];
+    var bagian = tanggalSaja.split("-");
+
     return new Date(
         Number(bagian[0]),
         Number(bagian[1]) - 1,
@@ -38,7 +39,7 @@ class EventItem {
 
         switch (this.kodeStatus()) {
             case "closed":
-                label = "Closed";
+                label = "Ditutup";
                 break;
 
             case "closing":
@@ -46,7 +47,7 @@ class EventItem {
                 break;
 
             default:
-                label = "Open";
+                label = "Dibuka";
         }
 
         return label;
@@ -87,28 +88,31 @@ function buatEventItem(judul, deadlineTeks) {
 }
 
 function hitungSisaSemuaKartu() {
-    var kartu = document.querySelectorAll(".card[data-deadline]");
+    var kartu = document.querySelectorAll("article[data-deadline]");
 
     for (var i = 0; i < kartu.length; i++) {
-        var judul = kartu[i].getAttribute("data-title") || "Event";
-
         var deadline = kartu[i].getAttribute("data-deadline");
 
         if (!deadline) {
             continue;
         }
 
-        var item = buatEventItem(judul, deadline);
+        var target = kartu[i].querySelector("[data-sisa-hari]");
 
-        var target = kartu[i].querySelector(".sisa-hari");
-
-        if (target) {
-            target.textContent = item.teksSisa();
-            target.setAttribute("data-status", item.kodeStatus());
+        if (!target) {
+            continue;
         }
 
+        var elJudul = kartu[i].querySelector("h2");
+        var judul = elJudul ? elJudul.textContent.trim() : "Event";
+
+        var item = buatEventItem(judul, deadline);
+
+        target.textContent = item.teksSisa();
+        target.setAttribute("data-status", item.kodeStatus());
     }
 }
+
 
 function setPesanError(form, namaField, pesan) {
     var kolom = form.elements[namaField];
@@ -276,13 +280,29 @@ function previewPosterTerpilih(inputPoster) {
     bukaPratinjau(urlPratinjauSementara);
 }
 
+function pasangKonfirmasiHapus() {
+    var formHapus = document.querySelectorAll("form.form-hapus");
+
+    for (var i = 0; i < formHapus.length; i++) {
+        formHapus[i].addEventListener("submit", function (event) {
+            var pesan = event.currentTarget.getAttribute("data-pesan")
+                || "Yakin ingin menghapus data ini?";
+
+            if (!confirm(pesan)) {
+                event.preventDefault();
+            }
+        });
+    }
+}
+
 function inisialisasi() {
+    pasangKonfirmasiHapus();
     hitungSisaSemuaKartu();
 
     var formEvent = document.getElementById("form-event");
 
     if (formEvent) {
-        formEvent.addEventListener("submit", function(event) {
+        formEvent.addEventListener("submit", function (event) {
             if (!validasiFormEvent(formEvent)) {
                 event.preventDefault();
             }
@@ -291,23 +311,17 @@ function inisialisasi() {
 
     var inputPoster = document.getElementById("poster");
 
-    var tombolPreview = document.getElementById(
-        "btn-preview-poster"
-    );
+    var tombolPreview = document.getElementById("btn-preview-poster");
 
     if (inputPoster && tombolPreview) {
-        tombolPreview.addEventListener("click", function() {
+        tombolPreview.addEventListener("click", function () {
             previewPosterTerpilih(inputPoster);
         });
     }
 
-    if (inputPoster) {
-        inputPoster.addEventListener("change", function() {
-            setPesanError(
-                inputPoster.form,
-                "poster",
-                ""
-            );
+    if (inputPoster && inputPoster.form) {
+        inputPoster.addEventListener("change", function () {
+            setPesanError(inputPoster.form, "poster", "");
         });
     }
 }
