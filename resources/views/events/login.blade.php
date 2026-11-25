@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Login')
+@section('hide-header', true)
 
 @section('content')
 <div class="min-h-screen bg-white">
@@ -10,7 +11,17 @@
             <div class="pointer-events-none absolute -right-24 top-1/4 size-[30rem] rounded-full bg-karsa-400/50 blur-3xl"></div>
             <div class="pointer-events-none absolute -left-16 -top-16 size-64 rounded-full bg-karsa-300/30 blur-3xl"></div>
 
-            <div class="relative">
+            <img src="{{ asset('images/charm_north-star.png') }}"
+                 alt=""
+                 aria-hidden="true"
+                 class="pointer-events-none absolute -bottom-16 -right-28 h-[28rem] w-auto object-contain opacity-15">
+
+            <img src="{{ asset('images/charm_north-star.png') }}"
+                 alt=""
+                 aria-hidden="true"
+                 class="pointer-events-none absolute left-8 top-24 h-20 w-20 object-contain opacity-15">
+
+            <div class="relative z-10">
                 <h2 class="mt-4 text-5xl font-semibold leading-tight">Kelola kegiatan organisasimu</h2>
                 <p class="mt-3 text-white/80">Masuk untuk mengatur event, poster, dan jadwal organisasimu.</p>
 
@@ -74,7 +85,8 @@
                 </button>
 
                 <p class="mt-4 text-center text-sm text-neutral-500">
-                    Hanya untuk admin organisasi.
+                    Hanya untuk admin organisasi dan superadmin.
+                    <br>
                     <a href="{{ route('events.index') }}" class="font-medium text-karsa-700 hover:underline">Kembali ke katalog</a>
                 </p>
             </form>
