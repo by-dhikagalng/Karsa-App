@@ -126,13 +126,11 @@ class AdminEventController extends Controller
 
     // ===================== Helper =====================
 
-        // Menolak akses (403) jika event bukan milik organisasi admin yang login
+    // Lapisan kedua pengecekan kepemilikan (lapisan pertama: middleware EnsureRole milik Bekti)
     private function pastikanPemilik(Event $event): void
     {
-        $user = auth()->user();
-
         abort_unless(
-            $user->isSuperAdmin() || (int) $event->organization_id === (int) $user->organization_id,
+            auth()->user()->canManageEvent($event),
             403,
             'Kamu tidak berhak mengelola event organisasi lain.'
         );

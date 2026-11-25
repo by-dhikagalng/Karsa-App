@@ -7,6 +7,10 @@
 <body>
     <h1>Kelola Event</h1>
     <p>Login sebagai: {{ auth()->user()->name }}</p>
+        <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="btn">Logout</button>
+    </form>
 
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
