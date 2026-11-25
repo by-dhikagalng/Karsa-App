@@ -72,6 +72,6 @@
             </tbody>
         </table>
 
-        {{ $events->links('pagination::default') }}
+        {{ $events->links('partials.pagination') }}
     @endif
 @endsection
