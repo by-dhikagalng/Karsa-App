@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Organization extends Model
 {
     protected $table = 'organizations';
+    protected $primaryKey = 'id';
+    public $timestamps = true;
 
     protected $fillable = ['name', 'type'];
 
