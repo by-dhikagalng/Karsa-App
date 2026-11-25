@@ -7,13 +7,28 @@ use App\Models\Event;
 
 class EventController extends Controller
 {
-    public function index()
+    // Menampilkan katalog event dengan filter kategori, eager loading, dan pagination
+    public function index(Request $request)
     {
-        $events = Event::with('organization')->orderBy('event_date')->paginate(6)->withQueryString();
+        $category = $request->query('category');
+
+        // Kategori yang tidak dikenal diabaikan dan dianggap "Semua"
+        if (! array_key_exists((string) $category, Event::CATEGORIES)) {
+            $category = null;
+        }
+
+        // Bagian Arya: jika ?category tidak ada, ambil dari cookie kategori terakhir, lalu simpan pilihan ke cookie
+
+        $events = Event::with('organization')
+            ->when($category, fn ($query) => $query->where('category', $category))
+            ->orderBy('event_date')
+            ->paginate(6)
+            ->withQueryString();
 
         return view('events.index', [
             'events' => $events,
             'categories' => Event::CATEGORIES,
+            'selectedCategory' => $category,
         ]);
     }
 
