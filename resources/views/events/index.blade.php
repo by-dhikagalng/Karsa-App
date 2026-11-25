@@ -255,7 +255,7 @@
 
             {{-- PAGINATION --}}
             <div class="mt-10">
-                {{ $events->withQueryString()->links() }}
+               {{ $events->withQueryString()->links('partials.pagination') }}
             </div>
 
         @endif
