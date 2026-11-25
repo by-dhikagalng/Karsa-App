@@ -253,4 +253,20 @@ class AdminEventController extends Controller
             unlink(public_path($path));
         }
     }
+
+        // Menghapus event beserta file posternya (file dihapus setelah baris database terhapus)
+    public function destroy(Event $event)
+    {
+        $this->pastikanPemilik($event);
+
+        $judul = $event->title;
+        $posterPath = $event->poster_path;
+
+        $event->delete();
+        $this->hapusPoster($posterPath);
+
+        return redirect()
+            ->route('admin.events.index')
+            ->with('success', 'Event "' . $judul . '" berhasil dihapus.');
+    }
 }

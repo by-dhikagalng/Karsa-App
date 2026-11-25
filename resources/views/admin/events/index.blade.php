@@ -52,7 +52,17 @@
                             @endswitch
                         </td>
                         <td>
-                            <a href="{{ route('admin.events.edit', $event) }}" class="btn">Ubah</a>
+                            <td>
+                                <a href="{{ route('admin.events.edit', $event) }}" class="btn">Ubah</a>
+
+                                <form action="{{ route('admin.events.destroy', $event) }}" method="POST" class="form-hapus"
+                                    data-pesan="Hapus event &quot;{{ $event->title }}&quot;? Data dan posternya tidak bisa dikembalikan."
+                                    onsubmit="return confirm(this.dataset.pesan)">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Hapus</button>
+                                </form>
+                            </td>
                         </td>
                     </tr>
                 @endforeach
