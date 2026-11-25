@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Ubah Event - Karsa</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('title', 'Ubah Event')
+
+@section('hide-header', '1')
+
+@section('content')
     <h1>Ubah Event</h1>
 
     <form action="{{ route('admin.events.update', $event) }}" method="POST" enctype="multipart/form-data" id="form-event">
@@ -24,5 +24,4 @@
         <button type="submit" class="btn">Simpan Perubahan</button>
         <a href="{{ route('admin.events.index') }}" class="btn">Batal</a>
     </form>
-</body>
-</html>
+@endsection

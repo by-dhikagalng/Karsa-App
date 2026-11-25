@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Kelola Event - Karsa</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('title', 'Kelola Event')
+
+@section('hide-header', '1')
+
+@section('content')
     <h1>Kelola Event</h1>
     <p>Login sebagai: {{ auth()->user()->name }}</p>
-        <form action="{{ route('logout') }}" method="POST">
+
+    <form action="{{ route('logout') }}" method="POST">
         @csrf
         <button type="submit" class="btn">Logout</button>
     </form>
@@ -56,17 +57,15 @@
                             @endswitch
                         </td>
                         <td>
-                            <td>
-                                <a href="{{ route('admin.events.edit', $event) }}" class="btn">Ubah</a>
+                            <a href="{{ route('admin.events.edit', $event) }}" class="btn">Ubah</a>
 
-                                <form action="{{ route('admin.events.destroy', $event) }}" method="POST" class="form-hapus"
-                                    data-pesan="Hapus event &quot;{{ $event->title }}&quot;? Data dan posternya tidak bisa dikembalikan."
-                                    onsubmit="return confirm(this.dataset.pesan)">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Hapus</button>
-                                </form>
-                            </td>
+                            <form action="{{ route('admin.events.destroy', $event) }}" method="POST" class="form-hapus"
+                                data-pesan="Hapus event &quot;{{ $event->title }}&quot;? Data dan posternya tidak bisa dikembalikan."
+                                onsubmit="return confirm(this.dataset.pesan)">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
@@ -75,5 +74,4 @@
 
         {{ $events->links('pagination::default') }}
     @endif
-</body>
-</html>
+@endsection
