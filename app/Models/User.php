@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Organization;
+use App\Models\Event;
 
 class User extends Authenticatable
 {
@@ -21,6 +22,8 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $table = 'users';
+    protected $primaryKey = 'id';
+    public $timestamps = true;
 
     protected $fillable = [
         'name',
@@ -61,5 +64,10 @@ class User extends Authenticatable
     public function isSuperAdmin(): bool // Fitur revisi dari Bekti. Untuk Authentication Super Admin
     {
         return $this->role === 'super_admin';
+    }
+
+    public function canManageEvent(Event $event): bool
+    {
+        return $this->isSuperAdmin() || (int) $this->organization_id === (int) $event->organization_id;
     }
 }

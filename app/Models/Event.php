@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Event extends Model
 {
     protected $table = 'events';
+    protected $primaryKey = 'id';
+    public $timestamps = true;
 
     protected $fillable = [
         'organization_id',
