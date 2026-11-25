@@ -23,7 +23,7 @@ class EnsureRole
         }
 
         // cek apakah role user termasuk yang diizinkan (admin_ormawa / super_admin)
-        if (empty($roles) && !in_array($user->role, $roles, true)) {
+        if (!empty($roles) && !in_array($user->role, $roles, true)) {
             abort(403, 'Anda tidak memiliki izin untuk mengakses halaman ini.');
         }
         

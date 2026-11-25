@@ -132,4 +132,19 @@ class AuthTest extends TestCase
             ->get("/admin/events/{$eventB->id}/edit")
             ->assertStatus(200);
     }
+
+    public function test_student_cannot_access_admin(): void
+    {
+        $user = User::create([
+            'name' => 'Student',
+            'email' => 'student@karsa.test',
+            'password' => 'password_student',
+            'role' => 'student',
+            'organization_id' => null,
+        ]);
+
+        $this->actingAs($user)
+            ->get('/admin/events')
+            ->assertStatus(403);
+    }
 }
